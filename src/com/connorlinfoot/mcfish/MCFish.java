@@ -80,7 +80,7 @@ public class MCFish extends JavaPlugin implements Listener {
 
         Entity entity1 = player.getWorld().spawnEntity(player.getLocation(), EntityType.SQUID);
         Squid squid = (Squid) entity1;
-        squid.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 9999, 9999, true));
+        squid.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 72000, 72000, true));
 
         hashMap.put(squid, armorStand);
 
