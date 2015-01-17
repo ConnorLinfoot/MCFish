@@ -45,7 +45,10 @@ public class MCFish extends JavaPlugin implements Listener {
                 if( hashMap.isEmpty() ) return;
                 for (Squid squid : hashMap.keySet()) {
                     ArmorStand armorStand = hashMap.get(squid);
-                    if( squid.isDead() || armorStand.isDead() ) continue;
+                    if (squid.isDead() || armorStand.isDead()) {
+                        hashMap.remove(squid);
+                        continue;
+                    }
                     armorStand.teleport(squid);
                 }
             }
