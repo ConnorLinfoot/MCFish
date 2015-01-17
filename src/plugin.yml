@@ -1,0 +1,5 @@
+name: MCFish
+main: com.connorlinfoot.mcfish.MCFish
+version: 1.0
+commands:
+  mcfish:
