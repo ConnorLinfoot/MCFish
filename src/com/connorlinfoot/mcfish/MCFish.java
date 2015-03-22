@@ -5,7 +5,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.*;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.inventory.ItemStack;
@@ -16,6 +15,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.EulerAngle;
 
 import java.util.HashMap;
+import java.util.Map;
 
 
 public class MCFish extends JavaPlugin implements Listener {
@@ -42,10 +42,12 @@ public class MCFish extends JavaPlugin implements Listener {
             @Override
             public void run() {
                 if( hashMap.isEmpty() ) return;
-                for (Squid squid : hashMap.keySet()) {
-                    ArmorStand armorStand = hashMap.get(squid);
+
+                for (Map.Entry<Squid, ArmorStand> entry : hashMap.entrySet()) {
+                    Squid squid = entry.getKey();
+                    ArmorStand armorStand = entry.getValue();
                     if (squid.isDead() || armorStand.isDead()) {
-                        hashMap.remove(squid);
+                        //hashMap.remove(squid);
                         squid.remove();
                         armorStand.remove();
                         continue;
@@ -60,7 +62,7 @@ public class MCFish extends JavaPlugin implements Listener {
         bukkitRunnable.runTaskTimer(this, 1L, 1L);
     }
 
-    @EventHandler
+    //@EventHandler
     public void onSquidSpawn(EntitySpawnEvent event) {
         Entity entity = event.getEntity();
         if (entity.getType() == EntityType.SQUID) {
@@ -90,16 +92,15 @@ public class MCFish extends JavaPlugin implements Listener {
         getLogger().info(getDescription().getName() + " has been disabled!");
     }
 
-    public static void spawnFish(Location location, Integer count) {
+    private static void spawnFish(Location location, Integer count) {
         for (int i = 0; i < count; i++) {
             spawnFish(location);
         }
     }
 
-    public static void spawnFish(Location location) {
+    private static void spawnFish(Location location) {
         Entity entity = location.getWorld().spawnEntity(location, EntityType.ARMOR_STAND);
         ArmorStand armorStand = (ArmorStand) entity;
-
         armorStand.setVisible(false);
         armorStand.setArms(true);
         ItemStack itemStack = new ItemStack(Material.RAW_FISH);
