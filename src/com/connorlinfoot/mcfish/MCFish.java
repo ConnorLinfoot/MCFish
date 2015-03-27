@@ -6,7 +6,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.*;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
@@ -19,7 +18,7 @@ import java.util.Map;
 
 
 public class MCFish extends JavaPlugin implements Listener {
-    public static HashMap<Squid, ArmorStand> hashMap = new HashMap<Squid, ArmorStand>();
+    private static HashMap<Squid, ArmorStand> hashMap = new HashMap<Squid, ArmorStand>();
 
     public void onEnable() {
         getConfig().options().copyDefaults(true);
@@ -60,15 +59,6 @@ public class MCFish extends JavaPlugin implements Listener {
         };
 
         bukkitRunnable.runTaskTimer(this, 1L, 1L);
-    }
-
-    //@EventHandler
-    public void onSquidSpawn(EntitySpawnEvent event) {
-        Entity entity = event.getEntity();
-        if (entity.getType() == EntityType.SQUID) {
-            spawnFish(entity.getLocation());
-            entity.remove();
-        }
     }
 
     @Override
