@@ -46,7 +46,6 @@ public class MCFish extends JavaPlugin implements Listener {
                     Squid squid = entry.getKey();
                     ArmorStand armorStand = entry.getValue();
                     if (squid.isDead() || armorStand.isDead()) {
-                        //hashMap.remove(squid);
                         squid.remove();
                         armorStand.remove();
                         continue;
@@ -63,7 +62,6 @@ public class MCFish extends JavaPlugin implements Listener {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-
         if( ! (sender instanceof Player ) ){
             return false;
         }
@@ -74,7 +72,6 @@ public class MCFish extends JavaPlugin implements Listener {
         } else {
             spawnFish(player.getLocation(), Integer.parseInt(args[0]));
         }
-
         return false;
     }
 
